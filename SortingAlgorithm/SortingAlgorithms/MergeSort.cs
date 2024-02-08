@@ -15,52 +15,51 @@ namespace SortingAlgorithm.SortingAlgorithms
 
         private int[] mergeSort(int[] arrayToBeSorted)
         {
-            if (arrayToBeSorted.Length == 1) return null;
+            if (arrayToBeSorted.Length == 1) return arrayToBeSorted;
 
             int half = arrayToBeSorted.Length / 2;
 
-            var a = arrayToBeSorted.Take(half).ToArray();
-            var b = arrayToBeSorted.Skip(half).Take(half + 1).ToArray();
+            var firstPart = arrayToBeSorted.Take(half).ToArray();
+            var secondPart = arrayToBeSorted.Skip(half).Take(half + 1).ToArray();
 
-            mergeSort(a);
-            mergeSort(b);
-            return merge(a, b);
+      
+            return merge(mergeSort(firstPart), mergeSort(secondPart));
         }
 
         private int[] merge(int[] firstArray, int[] secondArray)
         {
             int i = 0;
-            int[] c = new int[firstArray.Length + secondArray.Length];
+            int[] tempArrayOrded = new int[firstArray.Length + secondArray.Length];
 
             while(firstArray.Length > 0 &&  secondArray.Length > 0)
             {
-                if (firstArray[0] < secondArray[0])
+                if (firstArray[0] > secondArray[0])
                 {
-                    c[i] = firstArray[0];
-                    firstArray = firstArray.Skip(1).Take(firstArray.Length).ToArray();
+                    tempArrayOrded[i] = secondArray[0];
+                    secondArray = secondArray.Skip(1).Take(secondArray.Length).ToArray();
                     i++;
                 } else {
-                    c[i] = secondArray[0];
-                    secondArray = secondArray.Skip(1).Take(secondArray.Length).ToArray();
+                    tempArrayOrded[i] = firstArray[0];
+                    firstArray = firstArray.Skip(1).Take(firstArray.Length).ToArray();
                     i++;
                 }
             }
 
             while(firstArray.Length > 0)
             {
-                c[i] = firstArray[0];
+                tempArrayOrded[i] = firstArray[0];
                 firstArray = firstArray.Skip(1).Take(firstArray.Length).ToArray();
                 i++;
             }
 
             while (secondArray.Length > 0)
             {
-                c[i] = secondArray[0];
+                tempArrayOrded[i] = secondArray[0];
                 secondArray = secondArray.Skip(1).Take(secondArray.Length).ToArray();
                 i++;
             }
 
-            return c;
+            return tempArrayOrded;
         }
 
     }
