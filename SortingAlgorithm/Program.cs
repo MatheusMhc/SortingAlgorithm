@@ -22,6 +22,10 @@ internal class Program
         Console.WriteLine("================ Merge Sort ================");
         MergeSort mergeSort = new MergeSort();
         mergeSort.sort(new int[8] { 14,33,27,10,35,19,42,44 });
+
+        Console.WriteLine("================ Quick Sort ================");
+        QuickSort quickSort = new QuickSort();
+        quickSort.sort(new int[8] { 14, 33, 27, 10, 35, 19, 42, 44 });
     }
 
 }
