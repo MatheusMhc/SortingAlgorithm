@@ -12,26 +12,31 @@ namespace SortingAlgorithm.SortingAlgorithms
         public override void sort(int[] arrayToBeSorted)
         {
             quikSort(arrayToBeSorted,0,arrayToBeSorted.Length);
+            printArray(arrayToBeSorted);
         }
 
         private void quikSort(int[] arrayToBeSorted, int p, int r) {
+            if(p < r)
+            {
+                int pivot = r - 1;
 
-            int pivot = arrayToBeSorted.Length - 1;
-
-            int q = partition(arrayToBeSorted, p, pivot-1, pivot);
-            quikSort(arrayToBeSorted, p, q-1);
-            quikSort(arrayToBeSorted, q+1, r);   
+                int q = partition(arrayToBeSorted, p, pivot-1, pivot);
+                quikSort(arrayToBeSorted, p, q - 1);
+                quikSort(arrayToBeSorted, q + 1, r);
+            }
+            
         }
+
 
         private int partition(int[] arrayToBeSorted, int left, int rigth, int pivot)
         {
             while (left < rigth)
             {
-                while (left < rigth && arrayToBeSorted[left] >= arrayToBeSorted[pivot] )
+                while (left < rigth && arrayToBeSorted[left] < arrayToBeSorted[pivot])
                 {
                     left++;
                 }
-                while (rigth > left && arrayToBeSorted[rigth] < arrayToBeSorted[pivot])
+                while (rigth > left && arrayToBeSorted[rigth] >= arrayToBeSorted[pivot])
                 {
                     rigth--;
                 }
@@ -40,20 +45,8 @@ namespace SortingAlgorithm.SortingAlgorithms
             }
 
             swap(arrayToBeSorted, left, pivot);
-            return left;
-            //int x = arrayToBeSorted[p];
-            //int i = p - 1;
+            return left + 1;
 
-            // for(int j = p; j < r-1; j++)
-            //{
-            //    if (arrayToBeSorted[j] <= x)
-            //    {
-            //        i++;
-            //        swap(arrayToBeSorted, i, j);
-            //    }
-            //}
-            // swap(arrayToBeSorted, i+1, r);
-            //return i +1;
         }
     }
 }
