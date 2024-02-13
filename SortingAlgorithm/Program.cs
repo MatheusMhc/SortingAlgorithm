@@ -26,6 +26,7 @@ internal class Program
         Console.WriteLine("================ Quick Sort ================");
         QuickSort quickSort = new QuickSort();
         quickSort.sort(new int[8] { 14, 33, 27, 10, 35, 19, 42, 44 });
+        //quickSort.sort(new int[8] { 8,7,6,5,4,3,2,1 });
     }
 
 }

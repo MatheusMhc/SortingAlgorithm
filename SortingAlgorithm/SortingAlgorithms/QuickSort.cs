@@ -11,41 +11,37 @@ namespace SortingAlgorithm.SortingAlgorithms
     {
         public override void sort(int[] arrayToBeSorted)
         {
-            quikSort(arrayToBeSorted,0,arrayToBeSorted.Length);
+            quikSort(arrayToBeSorted,0,arrayToBeSorted.Length-1);
             printArray(arrayToBeSorted);
         }
 
         private void quikSort(int[] arrayToBeSorted, int p, int r) {
             if(p < r)
             {
-                int pivot = r - 1;
+                int pivot = r;
 
-                int q = partition(arrayToBeSorted, p, pivot-1, pivot);
-                quikSort(arrayToBeSorted, p, q - 1);
+                int q = partition(arrayToBeSorted, p, r, pivot);
+                quikSort(arrayToBeSorted, p, q-1);
                 quikSort(arrayToBeSorted, q + 1, r);
             }
             
         }
 
-
         private int partition(int[] arrayToBeSorted, int left, int rigth, int pivot)
         {
-            while (left < rigth)
-            {
-                while (left < rigth && arrayToBeSorted[left] < arrayToBeSorted[pivot])
-                {
-                    left++;
-                }
-                while (rigth > left && arrayToBeSorted[rigth] >= arrayToBeSorted[pivot])
-                {
-                    rigth--;
-                }
 
-                swap(arrayToBeSorted, left, rigth);
+            int i = left - 1;
+            for(int j = left; j <= rigth; j++)
+            {
+                if (arrayToBeSorted[j] < arrayToBeSorted[pivot])
+                {
+                    i++;
+                    swap(arrayToBeSorted, i,j);
+                }
             }
 
-            swap(arrayToBeSorted, left, pivot);
-            return left + 1;
+            swap(arrayToBeSorted, i + 1, rigth);
+            return i + 1;
 
         }
     }
